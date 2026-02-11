@@ -1,0 +1,149 @@
+.container {
+  max-width: 281px;
+  min-width: 281px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 38px 12px 60px 0px #c7c7c799;
+  color: #141416;
+  padding: 14px;
+  gap: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  user-select: none;
+}
+
+.date {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: rgba(28, 29, 32, 0.35);
+  border: 1px solid rgba(28, 29, 32, 0.08);
+  color: #fff;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 9px 13px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 5px 14px 0px rgba(28, 29, 32, 0.08);
+  border-radius: 10px;
+  font-weight: 500;
+  display: flex;
+  font-family: Arial;
+}
+
+.img {
+  width: 253px;
+  height: 253px;
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 24px;
+  user-select: text;
+}
+
+.bid {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+}
+
+.bidTitle {
+  font-size: 14px;
+  line-height: 1;
+  color: #94a3b8;
+}
+
+.bidPrice {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 600;
+  white-space: nowrap;
+  gap: 4px;
+  user-select: text;
+}
+
+.button {
+  font-family: Poppins;
+  background: #141416;
+  color: #fff;
+  padding: 14.5px 25px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 150%;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background: #333333;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 210px;
+    min-width: 210px;
+    padding: 10px;
+    border-radius: 18px;
+    box-shadow: 28.5px 9px 45px 0px #c7c7c799;
+    gap: 14px;
+  }
+
+  .date {
+    font-size: 10px;
+    padding: 6px 9px;
+    top: 20px;
+    right: 23px;
+  }
+
+  .img {
+    width: 190px;
+    height: 190px;
+    background-repeat: no-repeat;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .bid {
+    gap: 7px;
+  }
+
+  .bidTitle {
+    font-size: 11px;
+  }
+
+  .bidIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .bidPrice {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    gap: 3px;
+  }
+
+  .button {
+    font-size: 11px;
+    padding: 10.5px 17.5px;
+  }
+}

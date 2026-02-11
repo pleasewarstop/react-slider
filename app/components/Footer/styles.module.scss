@@ -1,0 +1,147 @@
+.container {
+  background: #111;
+  color: #999999;
+  font-family: Inter;
+  font-weight: 500;
+  padding-left: 69px;
+  padding-right: 69px;
+}
+
+.top,
+.bottom {
+  max-width: 1246px;
+  margin: 0 auto;
+}
+
+.top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 88px;
+  padding-bottom: 26px;
+  &:before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #818181;
+    height: 1px;
+    border-radius: 1px;
+    content: "";
+  }
+}
+
+.bottom {
+  font-size: 17px;
+  line-height: 25px;
+  padding-top: 55px;
+  padding-bottom: 86px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  line-height: 130%;
+  font-weight: 600;
+  font-family: Poppins;
+  color: #fff;
+}
+
+.logoIcon {
+  width: 65px;
+  height: 65px;
+}
+
+.nav {
+  display: flex;
+  gap: 70px;
+  align-items: center;
+}
+
+.navItem {
+  color: #b9b9b9;
+  font-size: 18px;
+  line-height: 27px;
+  text-decoration: none;
+  font-weight: 500;
+  &:hover {
+    color: #fff;
+  }
+}
+
+.reserved {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .top,
+  .bottom {
+    max-width: 886px;
+  }
+
+  .top {
+    padding-top: 60px;
+    padding-bottom: 22px;
+  }
+  .bottom {
+    padding-top: 39px;
+    padding-bottom: 60px;
+    font-size: 12.09px;
+    line-height: 17.78px;
+  }
+
+  .logo {
+    font-size: 21.33px;
+  }
+
+  .logoIcon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .navItem {
+    font-size: 12.68px;
+    line-height: 19.02px;
+  }
+}
+
+@media (max-width: 870px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: start;
+    padding-top: 52px;
+    padding-bottom: 49px;
+    gap: 32px;
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: start;
+    gap: 30px;
+  }
+
+  .navItem {
+    font-size: 14px;
+    line-height: 18.88px;
+    text-transform: uppercase;
+  }
+
+  .bottom {
+    padding-top: 25px;
+    padding-bottom: 40px;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+  }
+
+  .reserved {
+    display: inline;
+  }
+}

@@ -1,0 +1,40 @@
+.container {
+  padding: 70px 0;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  opacity: 0;
+  transition: opacity 0.3s 0s linear;
+
+  &.mounted {
+    opacity: 1;
+  }
+}
+
+.title {
+  font-size: 46px;
+  line-height: 48px;
+  color: #c5c5c5;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 50px 0;
+    gap: 50px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 36px;
+  }
+}
+
+@media (max-width: 700px) {
+  .title {
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
