@@ -29,7 +29,9 @@ export const Slider = ({ items }: Props) => {
     <div className={s.container}>
       <div className={s.slider}>
         <div
-          className={cn(s.sliderContent, { [s.disabled]: state.disabled })}
+          className={cn(s.sliderContent, {
+            [s.isAnimation]: state.isAnimation,
+          })}
           ref={contentRef}
           style={
             state.transformX !== null
@@ -41,7 +43,7 @@ export const Slider = ({ items }: Props) => {
           onPointerDown={onPointerDown}
         >
           {itemsToRender.map((item) => (
-            <SliderItem item={item} disabled={state.disabled} key={item.id} />
+            <SliderItem item={item} isMoving={state.isMoving} key={item.id} />
           ))}
         </div>
       </div>

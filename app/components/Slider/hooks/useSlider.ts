@@ -5,7 +5,8 @@ import { useResizeObserver } from "@/app/hooks/useResizeObserver";
 interface State {
   center: number;
   transformX: null | number;
-  disabled: boolean;
+  isMoving: boolean;
+  isAnimation: boolean;
 }
 
 type StopAnimation = () => void;
@@ -18,7 +19,8 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
   const [state, set] = useState<State>({
     center: 0,
     transformX: null,
-    disabled: false,
+    isMoving: false,
+    isAnimation: false,
   });
   const stateRef = useRef(state);
   const setState = useCallback((setter: State | Setter) => {
@@ -53,7 +55,7 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
     document.documentElement.addEventListener("pointerup", stopListenMoving);
   }
 
-  function onPointerMove<T extends { clientX: number }>(e: T) {
+  function onPointerMove(e: PointerEvent) {
     if (!contentRef.current) throw new Error("never");
     if (startXRef.current === null) throw new Error("never");
     if (baseTransformXRef.current === null) throw new Error("never");
@@ -66,7 +68,7 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
 
     setState((state) => ({
       ...state,
-      disabled: true,
+      isMoving: true,
       transformX: baseTransformX + diff,
     }));
   }
@@ -82,7 +84,8 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
       if (startCenterIRef.current === null) throw new Error("never");
       const newCenter = getDomCenterI();
       return {
-        disabled: false,
+        ...state,
+        isMoving: false,
         center: state.center + (newCenter - startCenterIRef.current),
         transformX:
           state.transformX +
@@ -151,7 +154,8 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
 
         const side = scrolledCount > 0 ? 1 : -1;
         setState((state) => ({
-          disabled: progress !== 1,
+          ...state,
+          isAnimation: progress !== 1,
           center: isNewElement ? state.center + side : state.center,
           transformX: startTransformXRef.current - side * correctedProgress,
         }));

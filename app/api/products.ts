@@ -157,24 +157,22 @@ const res = [
 ];
 
 export function getProducts() {
-  return res
-    .map(({ id, name }, i) => ({
-      id: id + i,
-      name: name + i,
-      ...randomFields(),
-    }))
-    .slice(0, 21);
-  // return fetch("https://api.coingecko.com/api/v3/nfts/list")
-  //   .then((res) => res.json())
-  //   .then<Product[]>((res: { id: string; name: string }[]) =>
-  //     res
-  //       .map(({ id, name }) => ({
-  //         id,
-  //         name,
-  //         ...randomFields(),
-  //       }))
-  //       .slice(0, 2),
-  //   );
+  // return res
+  //   .map(({ id, name }, i) => ({
+  //     id: id + i,
+  //     name: name + i,
+  //     ...randomFields(),
+  //   }))
+  //   .slice(0, 21);
+  return fetch("https://api.coingecko.com/api/v3/nfts/list")
+    .then((res) => res.json())
+    .then<Product[]>((res: { id: string; name: string }[]) =>
+      res.map(({ id, name }) => ({
+        id,
+        name,
+        ...randomFields(),
+      })),
+    );
 }
 
 const now = Date.now();

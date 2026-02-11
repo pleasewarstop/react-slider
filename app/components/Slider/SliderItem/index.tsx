@@ -3,15 +3,16 @@ import { Product } from "../../../api/products";
 import { ReactComponent as BidIcon } from "@/app/assets/icons/bid.svg";
 import s from "./styles.module.scss";
 import { useMounted } from "../../../hooks/useMounted";
+import cn from "classnames";
 
 interface Props {
   item: Product;
-  disabled: boolean;
+  isMoving: boolean;
 }
 
-export const SliderItem = ({ item, disabled }: Props) => {
+export const SliderItem = ({ item, isMoving }: Props) => {
   const mounted = useMounted();
-  const expectClickRef = useRef(false);
+  const expectedClickRef = useRef(false);
   const preventClickRef = useRef(false);
 
   // eslint-disable-next-line react-hooks/purity
@@ -24,18 +25,32 @@ export const SliderItem = ({ item, disabled }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (disabled === true && expectClickRef.current) {
+    if (isMoving === true && expectedClickRef.current) {
       preventClickRef.current = true;
+
+      const onPointerUp = (e: PointerEvent) => {
+        if (
+          e.target instanceof HTMLElement &&
+          !e.target?.classList.contains(s.button)
+        ) {
+          preventClickRef.current = false;
+        }
+        document.documentElement.removeEventListener("pointerup", onPointerUp);
+      };
+      document.documentElement.addEventListener("pointerup", onPointerUp);
     }
-  }, [disabled]);
+  }, [isMoving]);
 
   return (
-    <div className={s.container}>
+    <div className={cn(s.container, { [s.isMoving]: isMoving })}>
       <div className={s.date}>
         {mounted && formatMilliseconds(item.stopDate - now)}
       </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={item.img} alt="NFT" className={s.img} />
-      <div className={s.name}>{item.name}</div>
+      <div className={s.name} title={item.name}>
+        {item.name}
+      </div>
       <div className={s.bottom}>
         <div className={s.bid}>
           <div className={s.bidTitle}>Current bid</div>
@@ -45,9 +60,8 @@ export const SliderItem = ({ item, disabled }: Props) => {
         </div>
         <button
           className={s.button}
-          onMouseDown={() => (expectClickRef.current = true)}
-          onClick={(e) => {
-            expectClickRef.current = false;
+          onPointerDown={() => (expectedClickRef.current = true)}
+          onPointerUp={(e) => {
             if (preventClickRef.current) {
               preventClickRef.current = false;
               return;
@@ -63,7 +77,7 @@ export const SliderItem = ({ item, disabled }: Props) => {
 };
 
 function formatMilliseconds(ms: number): string {
-  if (ms < 0) ms = 0; // защита от отрицательных значений
+  if (ms < 0) ms = 0;
 
   const totalSeconds = Math.floor(ms / 1000);
 
@@ -71,7 +85,6 @@ function formatMilliseconds(ms: number): string {
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  // Добавляем ведущий ноль
   const hh = String(hours).padStart(2, "0");
   const mm = String(minutes).padStart(2, "0");
   const ss = String(seconds).padStart(2, "0");
