@@ -32,10 +32,12 @@ export function useScaleProvider(maxScreenWidth: number) {
         document.documentElement.getBoundingClientRect().width;
 
       if (screenWidth > maxScreenWidth) {
-        setState({
-          value: screenWidth / maxScreenWidth,
-          initialized: true,
-        });
+        if (stateRef.current.value !== screenWidth / maxScreenWidth) {
+          setState({
+            value: screenWidth / maxScreenWidth,
+            initialized: true,
+          });
+        }
       } else if (
         stateRef.current.value !== 1 ||
         !stateRef.current.initialized

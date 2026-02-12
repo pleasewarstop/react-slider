@@ -24,6 +24,7 @@ export const Slider = ({ items }: Props) => {
     RENDERED_ITEMS_COUNT,
   );
   const itemsToScroll = useIsScreenLess(550) ? 1 : 2;
+  const busyKeys: Record<string, boolean> = {};
 
   return (
     <div className={s.container}>
@@ -42,9 +43,14 @@ export const Slider = ({ items }: Props) => {
           }
           onPointerDown={onPointerDown}
         >
-          {itemsToRender.map((item) => (
-            <SliderItem item={item} isMoving={state.isMoving} key={item.id} />
-          ))}
+          {itemsToRender.map((item, i) => {
+            let key = item.id;
+            if (busyKeys[key]) key += i;
+            busyKeys[key] = true;
+            return (
+              <SliderItem item={item} isMoving={state.isMoving} key={key} />
+            );
+          })}
         </div>
       </div>
       <SliderButtons

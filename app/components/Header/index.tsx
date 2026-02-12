@@ -4,9 +4,12 @@ import { ReactComponent as CancelIcon } from "@/app/assets/icons/menu.svg";
 import s from "./styles.module.scss";
 import Link from "next/link";
 import cn from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScaleContainer } from "../ScaleContainer";
 import { useIsScaleInitialized } from "../ScaleContainer/useScale";
+import { useIsScreenLess } from "../../hooks/useIsScreenLess";
+
+const MOBILE_PX = 700;
 
 interface Props {
   small: boolean;
@@ -15,6 +18,10 @@ export const Header = ({ small }: Props) => {
   const [opened, setOpened] = useState(false);
   const MenuIconComponent = opened ? CancelIcon : MenuIcon;
   const initialized = useIsScaleInitialized();
+  const isMobile = useIsScreenLess(MOBILE_PX + 1);
+  useEffect(() => {
+    if (!isMobile && opened) setOpened(false);
+  }, [isMobile, opened]);
   return (
     <>
       <header

@@ -25,7 +25,7 @@ export const SliderItem = ({ item, isMoving }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (isMoving === true && expectedClickRef.current) {
+    if (expectedClickRef.current && isMoving) {
       preventClickRef.current = true;
 
       const onPointerUp = (e: PointerEvent) => {
@@ -35,6 +35,7 @@ export const SliderItem = ({ item, isMoving }: Props) => {
         ) {
           preventClickRef.current = false;
         }
+        expectedClickRef.current = false;
         document.documentElement.removeEventListener("pointerup", onPointerUp);
       };
       document.documentElement.addEventListener("pointerup", onPointerUp);
@@ -46,7 +47,6 @@ export const SliderItem = ({ item, isMoving }: Props) => {
       <div className={s.date}>
         {initialized && formatMilliseconds(item.stopDate - now)}
       </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={item.img} alt="NFT" className={s.img} />
       <div className={s.name} title={item.name}>
         {item.name}

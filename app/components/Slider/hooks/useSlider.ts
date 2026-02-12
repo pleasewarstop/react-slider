@@ -46,9 +46,9 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
     }));
   }, [contentRef, setState]);
 
-  function onPointerDown<T extends { clientX: number }>(e: T) {
+  function onPointerDown<T extends { button: number; clientX: number }>(e: T) {
     if (!contentRef.current) throw new Error("never");
-    if (prevProgressRef.current !== 1) return;
+    if (prevProgressRef.current !== 1 || e.button === 2) return;
 
     startXRef.current = e.clientX;
     startCenterIRef.current = getDomCenterI();
