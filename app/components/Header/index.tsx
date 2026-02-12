@@ -22,16 +22,34 @@ export const Header = ({ small }: Props) => {
   useEffect(() => {
     if (!isMobile && opened) setOpened(false);
   }, [isMobile, opened]);
+
+  const navItems = (
+    <>
+      <Link className={s.navItem} href="#">
+        DISCOVER
+      </Link>
+      <Link className={s.navItem} href="#">
+        CREATORS
+      </Link>
+      <Link className={s.navItem} href="#">
+        SELL
+      </Link>
+      <Link className={s.navItem} href="#">
+        STATS
+      </Link>
+    </>
+  );
   return (
     <>
-      <header
+      <ScaleContainer
         className={cn(s.container, {
           [s.small]: small,
           [s.opened]: opened,
           [s.initialized]: initialized,
         })}
+        origin="left top"
       >
-        <ScaleContainer className={s.content}>
+        <div className={s.content}>
           <div className={s.logo}>
             <LogoIcon className={s.logoIcon} />
             <span className={s.logoText}>DiveSea</span>
@@ -40,22 +58,10 @@ export const Header = ({ small }: Props) => {
             className={s.menuIcon}
             onClick={() => setOpened(!opened)}
           />
-          <nav className={s.nav}>
-            <Link className={s.navItem} href="#">
-              DISCOVER
-            </Link>
-            <Link className={s.navItem} href="#">
-              CREATORS
-            </Link>
-            <Link className={s.navItem} href="#">
-              SELL
-            </Link>
-            <Link className={s.navItem} href="#">
-              STATS
-            </Link>
-          </nav>
-        </ScaleContainer>
-      </header>
+          <nav className={s.nav}>{navItems}</nav>
+        </div>
+        {opened && <nav className={cn(s.nav, s.mobile)}>{navItems}</nav>}
+      </ScaleContainer>
       <ScaleContainer className={s.height} />
     </>
   );

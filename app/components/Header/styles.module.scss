@@ -1,24 +1,30 @@
-.container {
+.container.container.container {
   padding: 46px 69px;
   position: fixed;
   top: 0;
   width: 100%;
-  background: #fff;
-  transition: padding 0.3s 0s ease-in-out;
+  transition:
+    padding 0.3s 0s ease-in-out,
+    background-color 0.2s 0s ease-in-out;
   font-family: Inter;
   z-index: 1;
+  background-color: rgba(255, 255, 255, 0);
   &.small {
     padding-top: 18px;
     padding-bottom: 18px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
-  &.initialized .content {
-    transform: translateY(0);
+  &.initialized {
+    background-color: #fff;
+
+    & .content {
+      transform: translateY(0);
+    }
   }
 }
 
-.content.content {
+.content {
   display: flex;
   align-items: center;
   gap: 66px;
@@ -63,6 +69,9 @@
 .nav {
   display: flex;
   gap: 50px;
+  &.mobile {
+    display: none;
+  }
 }
 
 .navItem {
@@ -79,7 +88,7 @@
 }
 
 @media (max-width: 1024px) {
-  .container {
+  .container.container.container {
     padding: 33px;
     padding-left: 69px;
     padding-right: 69px;
@@ -110,7 +119,7 @@
 }
 
 @media (max-width: 700px) {
-  .container {
+  .container.container.container {
     padding: 30px;
 
     &.small.opened {
@@ -126,7 +135,7 @@
     }
   }
 
-  .content.content.content {
+  .content {
     justify-content: space-between;
     transform: none;
   }
@@ -140,7 +149,11 @@
     display: block;
   }
 
-  .nav {
+  .nav:not(.mobile) {
+    display: none !important;
+  }
+
+  .nav.mobile {
     position: fixed;
     background: #fff;
     top: 106px;
@@ -151,7 +164,6 @@
     padding-left: 30px;
     padding-right: 30px;
     flex-direction: column;
-    display: none;
 
     &:before {
       position: absolute;

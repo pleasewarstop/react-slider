@@ -6,8 +6,9 @@ import cn from "classnames";
 interface Props {
   children?: ReactNode;
   className?: string;
+  origin?: string;
 }
-export const ScaleContainer = ({ children, className }: Props) => {
+export const ScaleContainer = ({ children, className, origin }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const scale = useScale();
   // eslint-disable-next-line react-hooks/refs
@@ -21,7 +22,7 @@ export const ScaleContainer = ({ children, className }: Props) => {
           ? undefined
           : {
               transform: `scale(${scale})`,
-              transformOrigin: "top center",
+              transformOrigin: origin || "top center",
               marginBottom: addedHeight,
             }
       }
