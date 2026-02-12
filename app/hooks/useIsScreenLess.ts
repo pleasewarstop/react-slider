@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 export function useIsScreenLess(px: number): boolean {
   const [isLess, setIsLess] = useState(() => {
     if (typeof window === "undefined") return false;
-    return window.innerWidth < px;
+    return window.innerWidth <= px;
   });
 
   useEffect(() => {
     const handler = () => {
-      setIsLess(window.innerWidth < px);
+      setIsLess(window.innerWidth <= px);
     };
     handler();
 

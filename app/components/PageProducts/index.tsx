@@ -30,7 +30,8 @@ export const PageProducts = ({ products }: Props) => {
         }}
       >
         <Header small={headerSmall} />
-        <ScaleContainer>
+        <ScaleContainer className={s.scale}>
+          <div className={s.stretch} />
           <Content items={products} />
           <Footer />
         </ScaleContainer>

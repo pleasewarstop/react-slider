@@ -8,7 +8,11 @@ interface Props {
   className?: string;
   origin?: string;
 }
-export const ScaleContainer = ({ children, className, origin }: Props) => {
+export const ScaleContainer = ({
+  children,
+  className,
+  origin = "top center",
+}: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const scale = useScale();
   // eslint-disable-next-line react-hooks/refs
@@ -22,7 +26,7 @@ export const ScaleContainer = ({ children, className, origin }: Props) => {
           ? undefined
           : {
               transform: `scale(${scale})`,
-              transformOrigin: origin || "top center",
+              transformOrigin: origin,
               marginBottom: addedHeight,
             }
       }

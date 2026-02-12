@@ -18,7 +18,7 @@ export const Header = ({ small }: Props) => {
   const [opened, setOpened] = useState(false);
   const MenuIconComponent = opened ? CancelIcon : MenuIcon;
   const initialized = useIsScaleInitialized();
-  const isMobile = useIsScreenLess(MOBILE_PX + 1);
+  const isMobile = useIsScreenLess(MOBILE_PX);
   useEffect(() => {
     if (!isMobile && opened) setOpened(false);
   }, [isMobile, opened]);

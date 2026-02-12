@@ -35,6 +35,7 @@
 
 .height {
   height: 145px;
+  min-height: 145px;
   transition: height 0.3s 0s ease-in-out;
 }
 
@@ -115,6 +116,7 @@
 
   .height {
     height: 104px;
+    min-height: 104px;
   }
 }
 
