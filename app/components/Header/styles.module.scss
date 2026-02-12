@@ -13,17 +13,16 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
   }
-  &.mounted .content {
+  &.initialized .content {
     transform: translateY(0);
   }
 }
 
-.content {
+.content.content {
   display: flex;
   align-items: center;
   gap: 66px;
   max-width: 1246px;
-  margin: 0 auto;
   transform: translateY(-90px);
   transition: transform 0.2s 0s ease-in-out;
 }
@@ -127,8 +126,9 @@
     }
   }
 
-  .content {
+  .content.content.content {
     justify-content: space-between;
+    transform: none;
   }
 
   .logoIcon {

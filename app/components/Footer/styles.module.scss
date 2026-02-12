@@ -5,6 +5,12 @@
   font-weight: 500;
   padding-left: 69px;
   padding-right: 69px;
+  opacity: 0;
+  transition: opacity 0.3s 0s ease-in-out;
+
+  &.initialized {
+    opacity: 1;
+  }
 }
 
 .top,

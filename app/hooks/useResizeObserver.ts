@@ -11,7 +11,6 @@ export function useResizeObserver<T extends Element>(
     if (!element) return;
 
     if (typeof ResizeObserver === "undefined") {
-      // на случай SSR или старых браузеров
       return;
     }
 
@@ -23,8 +22,6 @@ export function useResizeObserver<T extends Element>(
 
     observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [ref, cb]);
 }

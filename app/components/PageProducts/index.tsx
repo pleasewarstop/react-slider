@@ -5,20 +5,22 @@ import { Content } from "@/app/components/Content";
 import { Footer } from "@/app/components/Footer";
 import { Product } from "@/app/api/products";
 import s from "./styles.module.scss";
-import { useRef, useState } from "react";
-import { mountedContext, useMountedProvider } from "../../hooks/useMounted";
+import { useState } from "react";
+import { scaleContext, useScaleProvider } from "../ScaleContainer/useScale";
+import { ScaleContainer } from "../ScaleContainer";
 
 const SMALL_HEADER_AFTER_SCROLL_PX = 40;
+const MAX_WIDTH = 1920;
 
 interface Props {
   products: Product[];
 }
 export const PageProducts = ({ products }: Props) => {
   const [headerSmall, setHeaderSmall] = useState(false);
-  const containerRef = useRef(null);
-  const mounted = useMountedProvider();
+  const scale = useScaleProvider(MAX_WIDTH);
+
   return (
-    <mountedContext.Provider value={mounted}>
+    <scaleContext.Provider value={scale}>
       <div
         className={s.container}
         onScroll={(e) => {
@@ -26,12 +28,13 @@ export const PageProducts = ({ products }: Props) => {
             if (!headerSmall) setHeaderSmall(true);
           } else if (headerSmall) setHeaderSmall(false);
         }}
-        ref={containerRef}
       >
         <Header small={headerSmall} />
-        <Content items={products} />
-        <Footer />
+        <ScaleContainer>
+          <Content items={products} />
+          <Footer />
+        </ScaleContainer>
       </div>
-    </mountedContext.Provider>
+    </scaleContext.Provider>
   );
 };

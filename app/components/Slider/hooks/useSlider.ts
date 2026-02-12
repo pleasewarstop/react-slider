@@ -1,6 +1,7 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { animate, linear } from "../animate";
 import { useResizeObserver } from "@/app/hooks/useResizeObserver";
+import { useScale } from "../../ScaleContainer/useScale";
 
 interface State {
   center: number;
@@ -36,6 +37,7 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
   const startCenterIRef = useRef<null | number>(null);
   const baseTransformXRef = useRef<null | number>(null);
   const movingStartedRef = useRef(false);
+  const scale = useScale();
 
   useEffect(() => {
     setState((state) => ({
@@ -69,7 +71,7 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
     setState((state) => ({
       ...state,
       isMoving: true,
-      transformX: baseTransformX + diff,
+      transformX: baseTransformX + diff / scale,
     }));
   }
 
@@ -89,7 +91,8 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
         center: state.center + (newCenter - startCenterIRef.current),
         transformX:
           state.transformX +
-          (newCenter - startCenterIRef.current) * getItemWidthPlusGap(),
+          ((newCenter - startCenterIRef.current) * getItemWidthPlusGap()) /
+            scale,
       };
     });
   }
@@ -157,7 +160,8 @@ export const useSlider = (contentRef: RefObject<HTMLDivElement | null>) => {
           ...state,
           isAnimation: progress !== 1,
           center: isNewElement ? state.center + side : state.center,
-          transformX: startTransformXRef.current - side * correctedProgress,
+          transformX:
+            startTransformXRef.current - (side * correctedProgress) / scale,
         }));
       },
     });

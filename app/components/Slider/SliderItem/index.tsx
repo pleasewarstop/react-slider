@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Product } from "../../../api/products";
 import { ReactComponent as BidIcon } from "@/app/assets/icons/bid.svg";
 import s from "./styles.module.scss";
-import { useMounted } from "../../../hooks/useMounted";
 import cn from "classnames";
+import { useIsScaleInitialized } from "../../ScaleContainer/useScale";
 
 interface Props {
   item: Product;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const SliderItem = ({ item, isMoving }: Props) => {
-  const mounted = useMounted();
+  const initialized = useIsScaleInitialized();
   const expectedClickRef = useRef(false);
   const preventClickRef = useRef(false);
 
@@ -44,7 +44,7 @@ export const SliderItem = ({ item, isMoving }: Props) => {
   return (
     <div className={cn(s.container, { [s.isMoving]: isMoving })}>
       <div className={s.date}>
-        {mounted && formatMilliseconds(item.stopDate - now)}
+        {initialized && formatMilliseconds(item.stopDate - now)}
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={item.img} alt="NFT" className={s.img} />

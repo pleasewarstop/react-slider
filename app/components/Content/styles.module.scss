@@ -8,7 +8,7 @@
   opacity: 0;
   transition: opacity 0.3s 0s linear;
 
-  &.mounted {
+  &.initialized {
     opacity: 1;
   }
 }

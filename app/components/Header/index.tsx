@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactComponent as LogoIcon } from "@/app/assets/icons/logo.svg";
 import { ReactComponent as MenuIcon } from "@/app/assets/icons/menu.svg";
 import { ReactComponent as CancelIcon } from "@/app/assets/icons/menu.svg";
@@ -7,7 +5,8 @@ import s from "./styles.module.scss";
 import Link from "next/link";
 import cn from "classnames";
 import { useState } from "react";
-import { useMounted } from "../../hooks/useMounted";
+import { ScaleContainer } from "../ScaleContainer";
+import { useIsScaleInitialized } from "../ScaleContainer/useScale";
 
 interface Props {
   small: boolean;
@@ -15,17 +14,17 @@ interface Props {
 export const Header = ({ small }: Props) => {
   const [opened, setOpened] = useState(false);
   const MenuIconComponent = opened ? CancelIcon : MenuIcon;
-  const mounted = useMounted();
+  const initialized = useIsScaleInitialized();
   return (
     <>
       <header
         className={cn(s.container, {
           [s.small]: small,
           [s.opened]: opened,
-          [s.mounted]: mounted,
+          [s.initialized]: initialized,
         })}
       >
-        <div className={s.content}>
+        <ScaleContainer className={s.content}>
           <div className={s.logo}>
             <LogoIcon className={s.logoIcon} />
             <span className={s.logoText}>DiveSea</span>
@@ -48,9 +47,9 @@ export const Header = ({ small }: Props) => {
               STATS
             </Link>
           </nav>
-        </div>
+        </ScaleContainer>
       </header>
-      <div className={s.height} />
+      <ScaleContainer className={s.height} />
     </>
   );
 };
