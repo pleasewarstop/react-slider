@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
-import { ReactComponent as ArrowLeft } from "@/app/assets/icons/arrow-left.svg";
-import { ReactComponent as ArrowRight } from "@/app/assets/icons/arrow-right.svg";
+import { ReactComponent as ArrowLeft } from "@/assets/icons/arrow-left.svg";
+import { ReactComponent as ArrowRight } from "@/assets/icons/arrow-right.svg";
 import s from "./styles.module.scss";
 
 interface Props {

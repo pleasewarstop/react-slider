@@ -1,9 +1,9 @@
 "use client";
 
-import { Header } from "@/app/components/Header";
-import { Content } from "@/app/components/Content";
-import { Footer } from "@/app/components/Footer";
-import { Product } from "@/app/api/products";
+import { Header } from "@/components/Header";
+import { Content } from "@/components/Content";
+import { Footer } from "@/components/Footer";
+import { Product } from "@/api/products";
 import s from "./styles.module.scss";
 import { useState } from "react";
 import { scaleContext, useScaleProvider } from "../ScaleContainer/useScale";

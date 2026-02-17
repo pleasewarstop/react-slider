@@ -1,13 +1,13 @@
-import { ReactComponent as LogoIcon } from "@/app/assets/icons/logo.svg";
-import { ReactComponent as MenuIcon } from "@/app/assets/icons/menu.svg";
-import { ReactComponent as CancelIcon } from "@/app/assets/icons/menu.svg";
+import { ReactComponent as LogoIcon } from "@/assets/icons/logo.svg";
+import { ReactComponent as MenuIcon } from "@/assets/icons/menu.svg";
+import { ReactComponent as CancelIcon } from "@/assets/icons/menu.svg";
 import s from "./styles.module.scss";
 import Link from "next/link";
 import cn from "classnames";
 import { useEffect, useState } from "react";
 import { ScaleContainer } from "../ScaleContainer";
 import { useIsScaleInitialized } from "../ScaleContainer/useScale";
-import { useIsScreenLess } from "../../hooks/useIsScreenLess";
+import { useScreenMaxWidth } from "@/hooks/useScreenMaxWidth";
 
 const MOBILE_PX = 700;
 
@@ -18,7 +18,7 @@ export const Header = ({ small }: Props) => {
   const [opened, setOpened] = useState(false);
   const MenuIconComponent = opened ? CancelIcon : MenuIcon;
   const initialized = useIsScaleInitialized();
-  const isMobile = useIsScreenLess(MOBILE_PX);
+  const isMobile = useScreenMaxWidth(MOBILE_PX);
   useEffect(() => {
     if (!isMobile && opened) setOpened(false);
   }, [isMobile, opened]);

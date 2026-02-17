@@ -1,6 +1,6 @@
 import Link from "next/link";
 import s from "./styles.module.scss";
-import { ReactComponent as Logo } from "@/app/assets/icons/logo.svg";
+import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
 import cn from "classnames";
 import { useIsScaleInitialized } from "../ScaleContainer/useScale";
 

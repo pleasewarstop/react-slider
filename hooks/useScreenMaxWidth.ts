@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-export function useIsScreenLess(px: number): boolean {
-  const [isLess, setIsLess] = useState(() => {
+export function useScreenMaxWidth(px: number): boolean {
+  const [isLessOrEqual, setIsLessOrEqual] = useState(() => {
     if (typeof window === "undefined") return false;
     return window.innerWidth <= px;
   });
 
   useEffect(() => {
     const handler = () => {
-      setIsLess(window.innerWidth <= px);
+      setIsLessOrEqual(window.innerWidth <= px);
     };
     handler();
 
@@ -18,5 +18,5 @@ export function useIsScreenLess(px: number): boolean {
     };
   }, [px]);
 
-  return isLess;
+  return isLessOrEqual;
 }

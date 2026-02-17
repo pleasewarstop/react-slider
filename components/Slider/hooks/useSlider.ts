@@ -1,6 +1,6 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { animate, linear } from "../animate";
-import { useResizeObserver } from "@/app/hooks/useResizeObserver";
+import { useResizeObserver } from "@/hooks/useResizeObserver";
 import { useScale } from "../../ScaleContainer/useScale";
 
 interface State {

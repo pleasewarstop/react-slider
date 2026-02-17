@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Product } from "../../../api/products";
-import { ReactComponent as BidIcon } from "@/app/assets/icons/bid.svg";
+import { ReactComponent as BidIcon } from "@/assets/icons/bid.svg";
 import s from "./styles.module.scss";
 import cn from "classnames";
 import { useIsScaleInitialized } from "../../ScaleContainer/useScale";

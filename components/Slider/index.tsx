@@ -7,7 +7,7 @@ import { Product } from "../../api/products";
 import s from "./styles.module.scss";
 import { useSlider } from "./hooks/useSlider";
 import { useItemsToRender } from "./hooks/useItemsToRender";
-import { useIsScreenLess } from "../../hooks/useIsScreenLess";
+import { useScreenMaxWidth } from "@/hooks/useScreenMaxWidth";
 import cn from "classnames";
 
 const RENDERED_ITEMS_COUNT = 21;
@@ -23,7 +23,7 @@ export const Slider = ({ items }: Props) => {
     state.center,
     RENDERED_ITEMS_COUNT,
   );
-  const itemsToScroll = useIsScreenLess(550) ? 1 : 2;
+  const itemsToScroll = useScreenMaxWidth(550) ? 1 : 2;
   const busyKeys: Record<string, boolean> = {};
 
   return (

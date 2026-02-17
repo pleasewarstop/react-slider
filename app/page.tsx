@@ -1,5 +1,5 @@
-import { PageProducts } from "./components/PageProducts";
-import { getProducts } from "./api/products";
+import { PageProducts } from "@/components/PageProducts";
+import { getProducts } from "../api/products";
 import "@fontsource/poppins";
 import "@fontsource/inter";
 
