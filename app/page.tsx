@@ -1,11 +1,9 @@
-import { PageProducts } from "@/components/PageProducts";
+import { Products } from "@/pages/Products";
 import { getProducts } from "../api/products";
-import "@fontsource/poppins";
-import "@fontsource/inter";
 
-const Page = async () => {
+const RootPage = async () => {
   const res = await getProducts();
-  return <PageProducts products={res} />;
+  return <Products products={res} />;
 };
 
-export default Page;
+export default RootPage;
