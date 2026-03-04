@@ -1,25 +1,25 @@
 import { useRef, ReactNode } from "react";
+import cn from "classnames";
 import { useScale } from "./useScale";
 import s from "./styles.module.scss";
-import cn from "classnames";
 
 interface Props {
   children?: ReactNode;
   className?: string;
   origin?: string;
 }
-export const ScaleContainer = ({
+export function ScaleContainer({
   children,
   className,
   origin = "top center",
-}: Props) => {
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const scale = useScale();
   // eslint-disable-next-line react-hooks/refs
   const addedHeight = (ref.current?.scrollHeight || 0) * (scale - 1);
   return (
     <div
-      className={cn(s.container, className)}
+      className={cn(className, s.container)}
       ref={ref}
       style={
         scale === 1
@@ -34,4 +34,4 @@ export const ScaleContainer = ({
       {children}
     </div>
   );
-};
+}

@@ -1,9 +1,13 @@
-import { Products } from "@/pages/Products";
-import { getProducts } from "../api/products";
+import { getProducts, Product } from "@/api/products";
+import { HomeClient } from "@/app/page.client";
 
-const RootPage = async () => {
-  const res = await getProducts();
-  return <Products products={res} />;
-};
-
-export default RootPage;
+export default async function Home() {
+  let products: Product[] = [];
+  let productsError: string | undefined;
+  try {
+    products = await getProducts();
+  } catch (e: any) {
+    productsError = e?.status?.error_message || "Fetch error";
+  }
+  return <HomeClient products={products} productsError={productsError} />;
+}

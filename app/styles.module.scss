@@ -5,19 +5,6 @@
   display: flex;
   flex-direction: column;
   gap: 70px;
-  opacity: 0;
-  transition: opacity 0.3s 0s linear;
-
-  &.initialized {
-    opacity: 1;
-  }
-}
-
-.title {
-  font-size: 46px;
-  line-height: 48px;
-  color: #c5c5c5;
-  margin: 0;
 }
 
 @media (max-width: 1024px) {

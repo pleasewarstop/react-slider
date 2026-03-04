@@ -7,22 +7,28 @@ export type Product = {
 };
 
 export function getProducts() {
-  // return mock
-  //   .map(({ id, name }, i) => ({
-  //     id: id + i,
-  //     name: name + i,
-  //     ...randomFields(),
-  //   }))
-  //   .slice(0, 21);
-  return fetch("https://api.coingecko.com/api/v3/nfts/list")
-    .then((res) => res.json())
-    .then<Product[]>((res: { id: string; name: string }[]) =>
-      res.map(({ id, name }) => ({
-        id,
-        name,
-        ...randomFields(),
-      })),
-    );
+  return mock
+    .map(({ id, name }, i) => ({
+      id: id + i,
+      name: name + i,
+      ...randomFields(),
+    }))
+    .slice(0, 21);
+  // return fetch("https://api.coingecko.com/api/v3/nfts/list")
+  //   .then((res) => {
+  //     if (res.status === 200) return res.json();
+  //     else throw res.json();
+  //   })
+  //   .then<Product[]>((res: { id: string; name: string }[]) => {
+  //     return res.map(({ id, name }) => ({
+  //       id,
+  //       name,
+  //       ...randomFields(),
+  //     }));
+  //   })
+  //   .catch(async (e) => {
+  //     throw await e;
+  //   });
 }
 
 const now = Date.now();

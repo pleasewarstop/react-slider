@@ -1,13 +1,10 @@
 import Link from "next/link";
-import s from "./styles.module.scss";
 import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
-import cn from "classnames";
-import { useIsScaleInitialized } from "../ScaleContainer/useScale";
+import s from "./styles.module.scss";
 
-export const Footer = () => {
-  const initialized = useIsScaleInitialized();
+export function Footer() {
   return (
-    <footer className={cn(s.container, { [s.initialized]: initialized })}>
+    <footer className={s.container}>
       <div className={s.top}>
         <div className={s.logo}>
           <Logo className={s.logoIcon} /> DiveSea
@@ -32,4 +29,4 @@ export const Footer = () => {
       </div>
     </footer>
   );
-};
+}

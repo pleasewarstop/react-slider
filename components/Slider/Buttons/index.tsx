@@ -7,7 +7,7 @@ interface Props {
   prev: MouseEventHandler;
   next: MouseEventHandler;
 }
-export const SliderButtons = ({ prev, next }: Props) => {
+export function SliderButtons({ prev, next }: Props) {
   return (
     <div className={s.container}>
       <button onClick={prev} className={s.left}>
@@ -18,4 +18,4 @@ export const SliderButtons = ({ prev, next }: Props) => {
       </button>
     </div>
   );
-};
+}

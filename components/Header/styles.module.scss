@@ -16,7 +16,7 @@
     border-bottom-right-radius: 20px;
   }
   &.initialized {
-    background-color: #fff;
+    background-color: var(--color-white);
 
     & .content {
       transform: translateY(0);
@@ -42,7 +42,6 @@
 .logo {
   display: flex;
   align-items: center;
-  color: #141416;
   gap: 7px;
   font-size: 22px;
   line-height: 24px;
@@ -57,13 +56,12 @@
 
 .menuIcon {
   display: none;
-  color: #141416;
   min-width: 40px;
   width: 40px;
   height: 40px;
   cursor: pointer;
   &:hover {
-    color: #606060;
+    opacity: 0.7;
   }
 }
 
@@ -139,7 +137,6 @@
 
   .content {
     justify-content: space-between;
-    transform: none;
   }
 
   .logoIcon {
@@ -157,7 +154,7 @@
 
   .nav.mobile {
     position: fixed;
-    background: #fff;
+    background: var(--color-white);
     top: 106px;
     left: 0;
     right: 0;

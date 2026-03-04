@@ -1,20 +1,19 @@
+import { useEffect, useEffectEvent, useLayoutEffect, useState } from "react";
+import Link from "next/link";
+import cn from "classnames";
+import { ScaleContainer } from "@/components/ScaleContainer";
+import { useIsScaleInitialized } from "@/components/ScaleContainer/useScale";
+import { useScreenMaxWidth } from "@/hooks/useScreenMaxWidth";
 import { ReactComponent as LogoIcon } from "@/assets/icons/logo.svg";
 import { ReactComponent as MenuIcon } from "@/assets/icons/menu.svg";
 import { ReactComponent as CancelIcon } from "@/assets/icons/menu.svg";
 import s from "./styles.module.scss";
-import Link from "next/link";
-import cn from "classnames";
-import { useEffect, useState } from "react";
-import { ScaleContainer } from "../ScaleContainer";
-import { useIsScaleInitialized } from "../ScaleContainer/useScale";
-import { useScreenMaxWidth } from "@/hooks/useScreenMaxWidth";
 
 const MOBILE_PX = 700;
+const SMALL_HEADER_AFTER_SCROLL_PX = 40;
 
-interface Props {
-  small: boolean;
-}
-export const Header = ({ small }: Props) => {
+interface Props {}
+export function Header({}: Props) {
   const [opened, setOpened] = useState(false);
   const MenuIconComponent = opened ? CancelIcon : MenuIcon;
   const initialized = useIsScaleInitialized();
@@ -22,6 +21,19 @@ export const Header = ({ small }: Props) => {
   useEffect(() => {
     if (!isMobile && opened) setOpened(false);
   }, [isMobile, opened]);
+
+  const [small, setSmall] = useState(false);
+
+  const onScroll = useEffectEvent(() => {
+    if (document.documentElement.scrollTop >= SMALL_HEADER_AFTER_SCROLL_PX) {
+      if (!small) setSmall(true);
+    } else if (small) setSmall(false);
+  });
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const navItems = (
     <>
@@ -65,4 +77,4 @@ export const Header = ({ small }: Props) => {
       <ScaleContainer className={s.height} />
     </>
   );
-};
+}

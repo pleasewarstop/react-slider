@@ -1,21 +1,29 @@
 "use client";
 
-import { useRef } from "react";
-import { SliderItem } from "./SliderItem";
-import { SliderButtons } from "./SliderButtons";
-import { Product } from "../../api/products";
-import s from "./styles.module.scss";
+import { ReactNode, useRef } from "react";
+import cn from "classnames";
+import { useScreenMaxWidth } from "@/hooks/useScreenMaxWidth";
+import { SliderButtons } from "./Buttons";
 import { useSlider } from "./hooks/useSlider";
 import { useItemsToRender } from "./hooks/useItemsToRender";
-import { useScreenMaxWidth } from "@/hooks/useScreenMaxWidth";
-import cn from "classnames";
+import s from "./styles.module.scss";
 
 const RENDERED_ITEMS_COUNT = 21;
 
-interface Props {
-  items: Product[];
+export interface SliderItemProps<T extends { id: string }> {
+  item: T;
+  isMoving: boolean;
+  key: string;
 }
-export const Slider = ({ items }: Props) => {
+
+interface Props<T extends { id: string }> {
+  items: T[];
+  renderItem: (props: SliderItemProps<T>) => ReactNode;
+}
+export function Slider<T extends { id: string }>({
+  items,
+  renderItem,
+}: Props<T>) {
   const contentRef = useRef<HTMLDivElement>(null);
   const { state, scroll, onPointerDown } = useSlider(contentRef);
   const itemsToRender = useItemsToRender(
@@ -47,9 +55,7 @@ export const Slider = ({ items }: Props) => {
             let key = item.id;
             if (busyKeys[key]) key += i;
             busyKeys[key] = true;
-            return (
-              <SliderItem item={item} isMoving={state.isMoving} key={key} />
-            );
+            return renderItem({ item, isMoving: state.isMoving, key });
           })}
         </div>
       </div>
@@ -59,4 +65,4 @@ export const Slider = ({ items }: Props) => {
       />
     </div>
   );
-};
+}

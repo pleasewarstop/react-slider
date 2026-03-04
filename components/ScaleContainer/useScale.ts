@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState } from "react";
-import { useResizeObserver } from "../../hooks/useResizeObserver";
+import { useResizeObserver } from "@/hooks/useResizeObserver";
 
 export function useScale() {
   return useContext(scaleContext).value;

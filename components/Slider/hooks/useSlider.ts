@@ -1,7 +1,7 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from "react";
-import { animate, linear } from "../animate";
+import { animate, linear } from "@/components/Slider/animate";
+import { useScale } from "@/components/ScaleContainer/useScale";
 import { useResizeObserver } from "@/hooks/useResizeObserver";
-import { useScale } from "../../ScaleContainer/useScale";
 
 interface State {
   center: number;

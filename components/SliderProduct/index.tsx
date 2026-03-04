@@ -1,19 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { Product } from "../../../api/products";
+"use client";
+
+import { useEffect, useState } from "react";
+import cn from "classnames";
+import { useIsScaleInitialized } from "@/components/ScaleContainer/useScale";
 import { ReactComponent as BidIcon } from "@/assets/icons/bid.svg";
 import s from "./styles.module.scss";
-import cn from "classnames";
-import { useIsScaleInitialized } from "../../ScaleContainer/useScale";
+import { Product } from "@/api/products";
+import { SliderItemProps } from "@/components/Slider";
+import { SliderProductButton } from "@/components/SliderProduct/Button";
 
-interface Props {
-  item: Product;
-  isMoving: boolean;
-}
-
-export const SliderItem = ({ item, isMoving }: Props) => {
+export function SliderProduct({ item, isMoving }: SliderItemProps<Product>) {
   const initialized = useIsScaleInitialized();
-  const expectedClickRef = useRef(false);
-  const preventClickRef = useRef(false);
 
   // eslint-disable-next-line react-hooks/purity
   const [now, setNow] = useState(Date.now());
@@ -23,24 +20,6 @@ export const SliderItem = ({ item, isMoving }: Props) => {
     }, 1000);
     return () => clearInterval(intervalId);
   }, []);
-
-  useEffect(() => {
-    if (expectedClickRef.current && isMoving) {
-      preventClickRef.current = true;
-
-      const onPointerUp = (e: PointerEvent) => {
-        if (
-          e.target instanceof HTMLElement &&
-          !e.target?.classList.contains(s.button)
-        ) {
-          preventClickRef.current = false;
-        }
-        expectedClickRef.current = false;
-        document.documentElement.removeEventListener("pointerup", onPointerUp);
-      };
-      document.documentElement.addEventListener("pointerup", onPointerUp);
-    }
-  }, [isMoving]);
 
   return (
     <div className={cn(s.container, { [s.isMoving]: isMoving })}>
@@ -58,23 +37,11 @@ export const SliderItem = ({ item, isMoving }: Props) => {
             <BidIcon className={s.bidIcon} /> {item.bid} ETH
           </div>
         </div>
-        <button
-          className={s.button}
-          onPointerDown={() => (expectedClickRef.current = true)}
-          onPointerUp={(e) => {
-            if (preventClickRef.current) {
-              preventClickRef.current = false;
-              return;
-            }
-            console.log(e);
-          }}
-        >
-          PLACE BID
-        </button>
+        <SliderProductButton onPointerUp={console.log} isMoving={isMoving} />
       </div>
     </div>
   );
-};
+}
 
 function formatMilliseconds(ms: number): string {
   if (ms < 0) ms = 0;
